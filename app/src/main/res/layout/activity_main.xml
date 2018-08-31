@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_48sdp"
+        android:layout_marginStart="@dimen/top_search_margin"
+        android:layout_marginEnd="@dimen/top_search_margin"
+        app:cardCornerRadius="@dimen/top_search_corner_radius"
+        android:transitionName="searchCard"
+        android:id="@+id/xTopSearchLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height">
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/top_search_padding"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_search" />
+
+            <com.anuj55149.kaarbizz.utilities.TypefaceTextView
+                android:id="@+id/tvSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search_cars"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:layout_toEndOf="@+id/ivSearch"
+                android:layout_toStartOf="@+id/ivCancel1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/top_search_text_size"
+                app:typeface="@string/Font_Montserrat_Regular"/>
+
+            <ImageView
+                android:id="@+id/ivCancel1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/top_search_padding"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_cancel" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvGpsLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/top_search_padding"
+        android:layout_marginBottom="@dimen/toolbar_height"
+        app:cardCornerRadius="@dimen/gps_radius"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/top_search_padding"
+            app:srcCompat="@drawable/ic_gps" />
+
+    </android.support.v7.widget.CardView>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<resources>
+
+    <dimen name="top_search_corner_radius">@dimen/_4sdp</dimen>
+    <dimen name="top_search_search_margin">@dimen/_6sdp</dimen>
+    <dimen name="top_search_margin">@dimen/_12sdp</dimen>
+    <dimen name="top_search_text_size">@dimen/_12ssp</dimen>
+    <dimen name="top_search_padding">@dimen/_12sdp</dimen>
+    <dimen name="gps_radius">@dimen/_24sdp</dimen>
+    <dimen name="toolbar_height">@dimen/_42sdp</dimen>
+
+
+</resources>
