@@ -13,6 +13,7 @@
         android:layout_marginStart="@dimen/top_search_search_margin"
         android:layout_marginEnd="@dimen/top_search_search_margin"
         android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/top_search_margin"
         app:cardCornerRadius="@dimen/top_search_corner_radius"
         android:transitionName="searchCard"
         android:id="@+id/xTopSearchLayout">
@@ -38,6 +39,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:layout_toEndOf="@+id/ivBack"
+                android:paddingStart="@dimen/top_search_padding"
                 android:layout_marginEnd="@dimen/top_search_margin"
                 android:layout_toStartOf="@+id/ivCancel"
                 android:background="@android:color/transparent"
@@ -51,10 +53,16 @@
                 android:padding="@dimen/top_search_padding"
                 android:layout_alignParentEnd="true"
                 android:visibility="gone"
-                app:srcCompat="@drawable/ic_cancel" />
+                app:srcCompat="@drawable/ic_cancel_circle" />
 
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/xTopSearchLayout" />
 
 </RelativeLayout>

@@ -6,4 +6,14 @@
     <string name="Font_Montserrat_Regular">Montserrat-Regular</string>
     <string name="Font_Montserrat_SemiBold">Montserrat-SemiBold</string>
     <string name="search_cars">Search cars</string>
+    <string name="my_account">My Account</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="later">Later</string>
+    <string name="sign_in_for_better_experience">Sign in for better experience</string>
+    <string name="log_in">Log in</string>
+    <string name="welcome">Welcome</string>
+    <string name="my_email">anuj55149@gmail.com</string>
+    <string name="my_name">Anuj Kumar Sharma</string>
 </resources>
