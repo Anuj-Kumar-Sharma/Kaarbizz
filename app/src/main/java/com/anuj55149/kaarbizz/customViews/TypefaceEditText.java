@@ -1,10 +1,11 @@
-package com.anuj55149.kaarbizz.utilities;
+package com.anuj55149.kaarbizz.customViews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v4.util.LruCache;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -14,13 +15,15 @@ import com.anuj55149.kaarbizz.R;
  * Created by anuj5 on 30-12-2017.
  */
 
-public class TypefaceTextView extends android.support.v7.widget.AppCompatTextView {
+public class TypefaceEditText extends AppCompatEditText {
 
     private static LruCache<String, Typeface> sTypefaceCache =
-            new LruCache<>(12);
+            new LruCache<String, Typeface>(12);
 
-    public TypefaceTextView(Context context, AttributeSet attrs) {
+    public TypefaceEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        // Get our custom attributes
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.Typeface, 0, 0);
 
@@ -32,13 +35,8 @@ public class TypefaceTextView extends android.support.v7.widget.AppCompatTextVie
                 Typeface typeface = sTypefaceCache.get(typefaceName);
 
                 if (typeface == null) {
-                    if (typefaceName.startsWith("Mon")) {
-                        typeface = Typeface.createFromAsset(context.getAssets(),
-                                String.format("fonts/%s.otf", typefaceName));
-                    } else {
-                        typeface = Typeface.createFromAsset(context.getAssets(),
-                                String.format("fonts/%s.ttf", typefaceName));
-                    }
+                    typeface = Typeface.createFromAsset(context.getAssets(),
+                            String.format("fonts/%s.otf", typefaceName));
 
 
                     // Cache the Typeface object
@@ -53,4 +51,14 @@ public class TypefaceTextView extends android.support.v7.widget.AppCompatTextVie
             a.recycle();
         }
     }
+
+    /*@Override
+    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK &&
+                event.getAction() == KeyEvent.ACTION_UP) {
+            this.clearFocus();
+            return false;
+        }
+        return super.dispatchKeyEvent(event);
+    }*/
 }

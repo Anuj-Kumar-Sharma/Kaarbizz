@@ -34,7 +34,7 @@
         <activity
             android:name=".activities.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"

@@ -34,7 +34,7 @@
                     android:padding="@dimen/top_search_padding"
                     android:src="@drawable/ic_menu" />
 
-                <com.anuj55149.kaarbizz.utilities.TypefaceTextView
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
                     android:id="@+id/tvSearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

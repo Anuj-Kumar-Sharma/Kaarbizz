@@ -16,4 +16,10 @@
     <string name="welcome">Welcome</string>
     <string name="my_email">anuj55149@gmail.com</string>
     <string name="my_name">Anuj Kumar Sharma</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="ip_address_dialog_message">1. Run the server \n2. Enter the current <b>IP Address</b> of the System running the server</string>
+    <string name="ip_address_dialog_title">Server configuration error</string>
+    <string name="retry">RETRY</string>
+    <string name="string_continue"><u>CONTINUE</u></string>
 </resources>

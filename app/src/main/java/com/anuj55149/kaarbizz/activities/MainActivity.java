@@ -25,8 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anuj55149.kaarbizz.R;
+import com.anuj55149.kaarbizz.dao.DealerDao;
+import com.anuj55149.kaarbizz.dao.ServerStateDao;
+import com.anuj55149.kaarbizz.models.Dealer;
 import com.anuj55149.kaarbizz.utilities.Constants;
+import com.anuj55149.kaarbizz.utilities.DialogBoxes;
 import com.anuj55149.kaarbizz.utilities.SharedPreference;
+import com.anuj55149.kaarbizz.volley.RequestCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -38,12 +43,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, View.OnClickListener {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, View.OnClickListener, RequestCallback {
 
     private Context context;
     private boolean isLocationPermissionGranted = false;
@@ -67,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
 
     private FirebaseAuth auth;
     private RelativeLayout rlLoginHeader, rlUserHeader;
+
+    private DealerDao dealerDao;
+    private ServerStateDao serverStateDao;
+    private ArrayList<Dealer> nearestDealers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         tvSearch.setOnClickListener(this);
         ivCancel.setOnClickListener(this);
         rlLoginHeader.setOnClickListener(this);
+
+        nearestDealers = new ArrayList<>();
+        dealerDao = new DealerDao(context, this);
+        serverStateDao = new ServerStateDao(context, this);
     }
 
 
@@ -146,32 +162,44 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 map = googleMap;
 
                 if (isLocationPermissionGranted) {
-                    getDeviceLocation(false);
+                    getDeviceLocation(false, true);
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
+
                     map.setMyLocationEnabled(true);
                     map.getUiSettings().setMyLocationButtonEnabled(false);
                     map.getUiSettings().setRotateGesturesEnabled(false);
                     map.setOnCameraMoveStartedListener(MainActivity.this);
                     map.setOnCameraIdleListener(MainActivity.this);
+                    map.getUiSettings().setTiltGesturesEnabled(false);
+                    map.getUiSettings().setMapToolbarEnabled(false);
+
+                    LatLng temp = new LatLng(25.9814011, 83.3702517);
+                    map.addMarker(new MarkerOptions().position(temp).title("Car Showroom"));
                 }
             }
         });
     }
 
-    private void getDeviceLocation(final boolean animate) {
+    private void getDeviceLocation(final boolean animate, final boolean getNearestDealers) {
         if (isLocationPermissionGranted) {
             FusedLocationProviderClient locationProviderClient = LocationServices.getFusedLocationProviderClient(context);
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+
             final Task locationTask = locationProviderClient.getLastLocation();
             locationTask.addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
                         Location location = (Location) locationTask.getResult();
+
+                        if (getNearestDealers) {
+                            dealerDao.getNearestDealers(location.getLatitude(), location.getLongitude());
+                        }
+
                         moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), defaultZoom, animate);
                     } else {
                         // Location Not found
@@ -234,12 +262,12 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
 
     @Override
     public void onCameraMoveStarted(int i) {
-        fab.setVisibility(View.GONE);
+
     }
 
     @Override
     public void onCameraIdle() {
-        fab.setVisibility(View.VISIBLE);
+
     }
 
     @SuppressLint("RestrictedApi")
@@ -258,8 +286,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 ivCancel.setVisibility(View.GONE);
                 break;
             case R.id.fabGpsLocation:
-                fab.setVisibility(View.GONE);
-                getDeviceLocation(true);
+                getDeviceLocation(true, false);
                 break;
             case R.id.ivMenu:
                 drawerLayout.openDrawer(GravityCompat.START, true);
@@ -283,6 +310,37 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                         if (!searchText.isEmpty()) ivCancel.setVisibility(View.VISIBLE);
                         else ivCancel.setVisibility(View.GONE);
                     }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onListRequestSuccessful(ArrayList list, int check, boolean status) {
+        switch (check) {
+            case Constants.DAO_GET_NEAREST_DEALERS:
+                if (status) {
+                    nearestDealers = list;
+                } else {
+                    View view = getLayoutInflater().inflate(R.layout.dialog_change_ip_address, null);
+                    DialogBoxes.showChangeIPDialog(view, context, serverStateDao);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onObjectRequestSuccessful(Object object, int check, boolean status) {
+        switch (check) {
+            case Constants.DAO_SERVER_STATE:
+                DialogBoxes.dismissProgressDialog();
+                if (status) {
+                    Toast.makeText(context, "Connection is successful", Toast.LENGTH_SHORT).show();
+                    getDeviceLocation(true, true);
+                } else {
+                    Toast.makeText(context, "Server is not connected", Toast.LENGTH_SHORT).show();
+                    View view = getLayoutInflater().inflate(R.layout.dialog_change_ip_address, null);
+                    DialogBoxes.showChangeIPDialog(view, context, serverStateDao);
                 }
                 break;
         }

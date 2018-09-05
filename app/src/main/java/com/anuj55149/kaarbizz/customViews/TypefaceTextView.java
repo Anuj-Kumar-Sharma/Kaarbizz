@@ -1,14 +1,12 @@
-package com.anuj55149.kaarbizz.utilities;
+package com.anuj55149.kaarbizz.customViews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v4.util.LruCache;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 
 import com.anuj55149.kaarbizz.R;
 
@@ -16,15 +14,13 @@ import com.anuj55149.kaarbizz.R;
  * Created by anuj5 on 30-12-2017.
  */
 
-public class TypefaceEditText extends AppCompatEditText {
+public class TypefaceTextView extends android.support.v7.widget.AppCompatTextView {
 
     private static LruCache<String, Typeface> sTypefaceCache =
-            new LruCache<String, Typeface>(12);
+            new LruCache<>(12);
 
-    public TypefaceEditText(Context context, AttributeSet attrs) {
+    public TypefaceTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        // Get our custom attributes
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.Typeface, 0, 0);
 
@@ -36,8 +32,13 @@ public class TypefaceEditText extends AppCompatEditText {
                 Typeface typeface = sTypefaceCache.get(typefaceName);
 
                 if (typeface == null) {
-                    typeface = Typeface.createFromAsset(context.getAssets(),
-                            String.format("fonts/%s.otf", typefaceName));
+                    if (typefaceName.startsWith("Mon")) {
+                        typeface = Typeface.createFromAsset(context.getAssets(),
+                                String.format("fonts/%s.otf", typefaceName));
+                    } else {
+                        typeface = Typeface.createFromAsset(context.getAssets(),
+                                String.format("fonts/%s.ttf", typefaceName));
+                    }
 
 
                     // Cache the Typeface object
@@ -52,14 +53,4 @@ public class TypefaceEditText extends AppCompatEditText {
             a.recycle();
         }
     }
-
-    /*@Override
-    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK &&
-                event.getAction() == KeyEvent.ACTION_UP) {
-            this.clearFocus();
-            return false;
-        }
-        return super.dispatchKeyEvent(event);
-    }*/
 }

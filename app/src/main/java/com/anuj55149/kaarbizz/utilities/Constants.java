@@ -16,4 +16,8 @@ public class Constants {
 
     public static final int GET_CARS_NAME_WITH_QUERY = 4;
     public static final int SEARCH_RESULT_CLICKED = 5;
+    public static final String SHARED_PREF_SERVER_IP_ADDRESS = "shared_pref_server_ip_address";
+
+    public static final int DAO_SERVER_STATE = 6;
+    public static final int DAO_GET_NEAREST_DEALERS = 7;
 }

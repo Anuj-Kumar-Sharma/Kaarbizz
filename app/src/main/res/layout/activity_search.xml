@@ -30,7 +30,7 @@
                 android:padding="@dimen/top_search_padding"
                 app:srcCompat="@drawable/ic_back" />
 
-            <com.anuj55149.kaarbizz.utilities.TypefaceEditText
+            <com.anuj55149.kaarbizz.customViews.TypefaceEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/etSearch"
@@ -63,6 +63,50 @@
         android:id="@+id/rvSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         android:layout_below="@id/xTopSearchLayout" />
+
+    <RelativeLayout
+        android:id="@+id/rlServerError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xTopSearchLayout"
+        android:padding="@dimen/gps_radius"
+        android:visibility="gone">
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvCheckIpAddressTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingBottom="@dimen/top_search_padding"
+            android:text="@string/ip_address_dialog_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/top_search_text_size"
+            app:typeface="@string/Font_Montserrat_SemiBold" />
+
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvIPContinue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCheckIpAddressTitle"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/top_search_padding"
+            android:text="@string/string_continue"
+            android:textColor="@color/black"
+            android:textSize="@dimen/top_search_text_size"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+    </RelativeLayout>
+
+
+    <ProgressBar
+        android:id="@+id/pbSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>
