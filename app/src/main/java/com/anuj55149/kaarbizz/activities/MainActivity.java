@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
 
     }
 
+    public void addedAnotherOne() {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
