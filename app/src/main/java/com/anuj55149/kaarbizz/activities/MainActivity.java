@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -38,12 +37,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,14 +55,12 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 123;
     private static final int SEARCH_ACTIVITY_REQUEST_CODE = 11;
 
-    private GoogleMap map;
     private static final float defaultZoom = 13;
 
     private SharedPreference pref;
 
     private DrawerLayout drawerLayout;
     private CardView searchCard;
-    private FloatingActionButton fab;
     private TextView tvSearch, tvUserName, tvUserEmail;
     private ImageView ivCancel, ivMenu, ivUserImage;
     private NavigationView navigationView;
@@ -79,15 +71,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private DealerDao dealerDao;
     private ServerStateDao serverStateDao;
     private ArrayList<Dealer> nearestDealers;
-
-
-    public void addedNew() {
-
-    }
-
-    public void addedAnotherOne() {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         tvSearch = findViewById(R.id.tvSearch);
         ivCancel = findViewById(R.id.ivCancel1);
         ivMenu = findViewById(R.id.ivMenu);
-        fab = findViewById(R.id.fabGpsLocation);
         drawerLayout = findViewById(R.id.mainDrawerLayout);
         navigationView = findViewById(R.id.navigationView);
         View navHeaderLayout = navigationView.getHeaderView(0);
@@ -151,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         tvUserEmail = navHeaderLayout.findViewById(R.id.tvUserEmail);
         ivUserImage = navHeaderLayout.findViewById(R.id.ivUserImage);
 
-        fab.setOnClickListener(this);
         ivMenu.setOnClickListener(this);
         tvSearch.setOnClickListener(this);
         ivCancel.setOnClickListener(this);
@@ -162,34 +143,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         serverStateDao = new ServerStateDao(context, this);
     }
 
-
-    private void initMap() {
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-
-                if (isLocationPermissionGranted) {
-                    getDeviceLocation(false, true);
-                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-
-                    map.setMyLocationEnabled(true);
-                    map.getUiSettings().setMyLocationButtonEnabled(false);
-                    map.getUiSettings().setRotateGesturesEnabled(false);
-                    map.setOnCameraMoveStartedListener(MainActivity.this);
-                    map.setOnCameraIdleListener(MainActivity.this);
-                    map.getUiSettings().setTiltGesturesEnabled(false);
-                    map.getUiSettings().setMapToolbarEnabled(false);
-
-                    LatLng temp = new LatLng(25.9814011, 83.3702517);
-                    map.addMarker(new MarkerOptions().position(temp).title("Car Showroom"));
-                }
-            }
-        });
-    }
 
     private void getDeviceLocation(final boolean animate, final boolean getNearestDealers) {
         if (isLocationPermissionGranted) {
@@ -208,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                         if (getNearestDealers) {
                             dealerDao.getNearestDealers(location.getLatitude(), location.getLongitude());
                         }
-
-                        moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), defaultZoom, animate);
                     } else {
                         // Location Not found
                     }
@@ -220,18 +171,12 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom, boolean animate) {
-        if (animate) map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-        else map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-    }
-
     private void getPermissions() {
         String permission[] = {Constants.PERMISSION_FINE_LOCATION, Constants.PERMISSION_COARSE_LOCATION};
 
         if (ContextCompat.checkSelfPermission(context, Constants.PERMISSION_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(context, Constants.PERMISSION_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 isLocationPermissionGranted = true;
-                initMap();
             } else {
                 ActivityCompat.requestPermissions(MainActivity.this, permission, LOCATION_PERMISSION_REQUEST_CODE);
             }
@@ -249,8 +194,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                     if (grantResult != PackageManager.PERMISSION_GRANTED) return;
                 }
                 isLocationPermissionGranted = true;
-
-                initMap();
         }
     }
 
