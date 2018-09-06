@@ -76,8 +76,6 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <!-- YOU MAIN CONTENT-->
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMain"
             android:layout_width="match_parent"
