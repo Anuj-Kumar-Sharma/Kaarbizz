@@ -80,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private ServerStateDao serverStateDao;
     private ArrayList<Dealer> nearestDealers;
 
+
+    public void addedNew() {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

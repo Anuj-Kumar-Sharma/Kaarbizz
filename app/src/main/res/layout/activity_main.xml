@@ -82,6 +82,7 @@
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
 
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
