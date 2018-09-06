@@ -1,6 +1,7 @@
 <resources>
 
     <dimen name="top_search_corner_radius">@dimen/_2sdp</dimen>
+    <dimen name="rating_padding">@dimen/_4sdp</dimen>
     <dimen name="top_search_search_margin">@dimen/_6sdp</dimen>
     <dimen name="user_email_text_size">@dimen/_10ssp</dimen>
     <dimen name="top_search_margin">@dimen/_12sdp</dimen>
@@ -11,6 +12,7 @@
     <dimen name="gps_radius">@dimen/_36sdp</dimen>
     <dimen name="google_button_margin">@dimen/_32sdp</dimen>
     <dimen name="toolbar_height">@dimen/_42sdp</dimen>
+    <dimen name="toolbar_bar_height">@dimen/_46sdp</dimen>
     <dimen name="user_image_dimen">@dimen/_62sdp</dimen>
     <dimen name="navigation_header_height">@dimen/_170sdp</dimen>
     <dimen name="navigation_drawer_width">@dimen/_255sdp</dimen>

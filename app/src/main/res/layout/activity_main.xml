@@ -5,65 +5,88 @@
     android:id="@+id/mainDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/xTopSearchLayout"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/top_search_margin"
-            android:layout_marginStart="@dimen/top_search_margin"
-            android:layout_marginTop="@dimen/_48sdp"
-            android:transitionName="searchCard"
-            app:cardCornerRadius="@dimen/top_search_corner_radius">
+            android:fitsSystemWindows="true"
+            app:elevation="0dp">
 
-            <RelativeLayout
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <ImageView
-                    android:id="@+id/ivMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:padding="@dimen/top_search_padding"
-                    android:src="@drawable/ic_menu" />
+                <!-- YOUR ITEMS BETWEEN TAB BAR AND APPBAR-->
 
-                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
-                    android:id="@+id/tvSearch"
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/user_toolbar" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/xTopSearchLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/top_search_margin"
+                android:transitionName="searchCard"
+                app:cardCornerRadius="@dimen/top_search_corner_radius">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/ivMenu"
-                    android:layout_toStartOf="@+id/ivCancel1"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:hint="@string/search_cars"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/top_search_padding"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/top_search_text_size"
-                    app:typeface="@string/Font_Montserrat_Regular" />
+                    android:layout_height="@dimen/toolbar_height">
 
-                <ImageView
-                    android:id="@+id/ivCancel1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:padding="@dimen/top_search_padding"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_cancel_circle" />
+                    <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                        android:id="@+id/tvSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/ivCancel1"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:hint="@string/search_cars"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/top_search_padding"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/top_search_text_size"
+                        app:typeface="@string/Font_Montserrat_Regular" />
 
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/ivCancel1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/top_search_padding"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_cancel_circle" />
 
-    </RelativeLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!-- YOU MAIN CONTENT-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigationView"

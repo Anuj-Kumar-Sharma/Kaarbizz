@@ -20,4 +20,5 @@ public class Constants {
 
     public static final int DAO_SERVER_STATE = 6;
     public static final int DAO_GET_NEAREST_DEALERS = 7;
+    public static final int SINGLE_DEALER_CLICKED = 8;
 }

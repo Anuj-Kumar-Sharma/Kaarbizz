@@ -17,6 +17,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anuj55149.kaarbizz.R;
+import com.anuj55149.kaarbizz.adapters.MainRecyclerViewAdapter;
+import com.anuj55149.kaarbizz.adapters.OnRecyclerViewItemClickListener;
 import com.anuj55149.kaarbizz.dao.DealerDao;
 import com.anuj55149.kaarbizz.dao.ServerStateDao;
 import com.anuj55149.kaarbizz.models.Dealer;
@@ -45,7 +49,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, View.OnClickListener, RequestCallback {
+public class MainActivity extends AppCompatActivity implements GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, View.OnClickListener, RequestCallback, OnRecyclerViewItemClickListener {
 
     private Context context;
     private boolean isLocationPermissionGranted = false;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private TextView tvSearch, tvUserName, tvUserEmail;
     private ImageView ivCancel, ivMenu, ivUserImage;
     private NavigationView navigationView;
+    private RecyclerView rvMain;
 
     private FirebaseAuth auth;
     private RelativeLayout rlLoginHeader, rlUserHeader;
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private DealerDao dealerDao;
     private ServerStateDao serverStateDao;
     private ArrayList<Dealer> nearestDealers;
+    private MainRecyclerViewAdapter mainRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         }
 
         getPermissions();
+        serverStateDao.getServerState();
     }
 
     private void updateActivityWithUserCredentials() {
@@ -132,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         tvUserName = navHeaderLayout.findViewById(R.id.tvUserName);
         tvUserEmail = navHeaderLayout.findViewById(R.id.tvUserEmail);
         ivUserImage = navHeaderLayout.findViewById(R.id.ivUserImage);
+        rvMain = findViewById(R.id.rvMain);
+
 
         ivMenu.setOnClickListener(this);
         tvSearch.setOnClickListener(this);
@@ -139,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         rlLoginHeader.setOnClickListener(this);
 
         nearestDealers = new ArrayList<>();
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(context, this);
+        rvMain.setLayoutManager(new LinearLayoutManager(context));
+        rvMain.setAdapter(mainRecyclerViewAdapter);
         dealerDao = new DealerDao(context, this);
         serverStateDao = new ServerStateDao(context, this);
     }
@@ -237,9 +249,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 tvSearch.setText("");
                 ivCancel.setVisibility(View.GONE);
                 break;
-            case R.id.fabGpsLocation:
-                getDeviceLocation(true, false);
-                break;
             case R.id.ivMenu:
                 drawerLayout.openDrawer(GravityCompat.START, true);
                 break;
@@ -273,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
             case Constants.DAO_GET_NEAREST_DEALERS:
                 if (status) {
                     nearestDealers = list;
+                    mainRecyclerViewAdapter.updateNearestDealersData(nearestDealers);
                 } else {
                     View view = getLayoutInflater().inflate(R.layout.dialog_change_ip_address, null);
                     DialogBoxes.showChangeIPDialog(view, context, serverStateDao);
@@ -296,5 +306,10 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onClick(View view, int position, int check) {
+
     }
 }
