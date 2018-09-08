@@ -34,45 +34,63 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/xTopSearchLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/top_search_margin"
-                android:transitionName="searchCard"
-                app:cardCornerRadius="@dimen/top_search_corner_radius">
+                android:background="@color/black">
 
-                <RelativeLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/xTopSearchLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/top_search_search_margin"
+                    android:transitionName="searchCard"
+                    app:cardCornerRadius="@dimen/top_search_corner_radius">
 
-                    <com.anuj55149.kaarbizz.customViews.TypefaceTextView
-                        android:id="@+id/tvSearch"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/ivCancel1"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:hint="@string/search_cars"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/top_search_padding"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/top_search_text_size"
-                        app:typeface="@string/Font_Montserrat_Regular" />
+                        android:layout_height="@dimen/gps_radius">
 
-                    <ImageView
-                        android:id="@+id/ivCancel1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/top_search_padding"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ic_cancel_circle" />
+                        <ImageView
+                            android:id="@+id/ivSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:padding="@dimen/top_search_padding"
+                            android:scaleType="centerCrop"
+                            android:tint="@color/colorPrimaryMoreDark"
+                            app:srcCompat="@drawable/ic_search" />
 
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
+                        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                            android:id="@+id/tvSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/ivSearch"
+                            android:layout_toStartOf="@+id/ivCancel1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:hint="@string/search_cars"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/top_search_padding"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/top_search_text_size"
+                            app:typeface="@string/Font_Montserrat_Regular" />
+
+                        <ImageView
+                            android:id="@+id/ivCancel1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/top_search_padding"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_cancel_circle" />
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
         </android.support.design.widget.AppBarLayout>
 

@@ -25,8 +25,12 @@ import com.anuj55149.kaarbizz.adapters.OnRecyclerViewItemClickListener;
 import com.anuj55149.kaarbizz.adapters.SearchRecyclerViewAdapter;
 import com.anuj55149.kaarbizz.dao.SearchDao;
 import com.anuj55149.kaarbizz.dao.ServerStateDao;
+import com.anuj55149.kaarbizz.models.searchTypes.SearchTypeCarMake;
+import com.anuj55149.kaarbizz.models.searchTypes.SearchTypeDealer;
+import com.anuj55149.kaarbizz.models.searchTypes.SearchTypeMakeModel;
 import com.anuj55149.kaarbizz.utilities.Constants;
 import com.anuj55149.kaarbizz.utilities.DialogBoxes;
+import com.anuj55149.kaarbizz.utilities.SharedPreference;
 import com.anuj55149.kaarbizz.volley.RequestCallback;
 
 import java.util.ArrayList;
@@ -43,8 +47,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressBar pbSearch;
     private RelativeLayout rlServerError;
     private TextView tvServerContinue;
+    private SharedPreference pref;
 
-    private ArrayList<String> searchCarsNameList;
+    private ArrayList<Object> searchList;
     private ProgressDialog progressDialog;
 
     private boolean isDialogShowing = false;
@@ -60,11 +65,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @SuppressLint("ClickableViewAccessibility")
     private void initViews() {
         context = this;
+        pref = new SharedPreference(context);
         etSearch = findViewById(R.id.etSearch);
         ivBack = findViewById(R.id.ivBack);
         ivCancel = findViewById(R.id.ivCancel);
-        recyclerView = findViewById(R.id.rvSearchResult);
-        searchCarsNameList = new ArrayList<>();
+        recyclerView = findViewById(R.id.rvSearcSuggestions);
+        searchList = new ArrayList<>();
         pbSearch = findViewById(R.id.pbSearch);
         rlServerError = findViewById(R.id.rlServerError);
         tvServerContinue = rlServerError.findViewById(R.id.tvIPContinue);
@@ -90,6 +96,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         ivBack.setOnClickListener(this);
         recyclerView.setOnTouchListener(this);
         tvServerContinue.setOnClickListener(this);
+
+        showHistory();
     }
 
     public void showServerError() {
@@ -155,23 +163,25 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             showHistory();
         } else {
             ivCancel.setVisibility(View.VISIBLE);
-            searchDao.getCarNamesWithQuery(s.toString());
+            if (s.length() > 1) {
+                searchDao.getCarNamesWithQuery(s.toString());
+            }
         }
-
     }
 
     private void showHistory() {
-        Toast.makeText(context, "History", Toast.LENGTH_SHORT).show();
+        searchList = pref.getHistoryList();
+        searchRecyclerViewAdapter.updateSearchResultData(searchList, Constants.TYPE_HISTORY);
     }
 
     @Override
     public void onListRequestSuccessful(ArrayList list, int check, boolean status) {
         switch (check) {
-            case Constants.GET_CARS_NAME_WITH_QUERY:
+            case Constants.GET_SEARCH_RESULT_WITH_QUERY:
                 if (status) {
                     hideServerError();
-                    searchCarsNameList = list;
-                    searchRecyclerViewAdapter.updateSearchResultData(list);
+                    searchList = list;
+                    searchRecyclerViewAdapter.updateSearchResultData(list, Constants.TYPE_DATA);
                 } else {
                     showServerError();
                 }
@@ -196,10 +206,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view, int position, int check) {
+        hideKeyboard(view);
+        Intent intent = new Intent(SearchActivity.this, SearchResultsActivity.class);
+        startActivity(intent);
         switch (check) {
-            case Constants.SEARCH_RESULT_CLICKED:
-                hideKeyboard(view);
-                Toast.makeText(context, "clicked " + searchCarsNameList.get(position), Toast.LENGTH_SHORT).show();
+            case Constants.EACH_CAR_MAKE_CLICKED:
+                SearchTypeCarMake searchTypeCarMake = (SearchTypeCarMake) searchList.get(position);
+                pref.updateHistoryList(searchTypeCarMake);
+                break;
+            case Constants.EACH_MAKE_MODEL_CLICKED:
+                SearchTypeMakeModel searchTypeMakeModel = (SearchTypeMakeModel) searchList.get(position);
+                pref.updateHistoryList(searchTypeMakeModel);
+                break;
+            case Constants.EACH_DEALER_CLICKED:
+                SearchTypeDealer searchTypeDealer = (SearchTypeDealer) searchList.get(position);
+                pref.updateHistoryList(searchTypeDealer);
                 break;
         }
     }

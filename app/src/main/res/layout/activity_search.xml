@@ -17,13 +17,13 @@
             android:id="@+id/xTopSearchLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/top_search_margin"
+            android:layout_margin="@dimen/top_search_search_margin"
             android:transitionName="searchCard"
             app:cardCornerRadius="@dimen/top_search_corner_radius">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height">
+                android:layout_height="@dimen/gps_radius">
 
                 <ImageView
                     android:id="@+id/ivBack"
@@ -31,6 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:padding="@dimen/top_search_padding"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_back" />
 
                 <com.anuj55149.kaarbizz.customViews.TypefaceEditText
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:padding="@dimen/top_search_padding"
+                    android:scaleType="centerCrop"
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_cancel_circle" />
 
@@ -65,7 +67,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvSearchResult"
+        android:id="@+id/rvSearcSuggestions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/abSearch" />

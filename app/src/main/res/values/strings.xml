@@ -22,4 +22,9 @@
     <string name="ip_address_dialog_title">Server configuration error</string>
     <string name="retry">RETRY</string>
     <string name="string_continue"><u>CONTINUE</u></string>
+    <string name="your_location">YOUR LOCATION</string>
+    <string name="change"><u>CHANGE</u></string>
+    <string name="dealer">DEALER</string>
+    <string name="brand">BRAND</string>
+
 </resources>

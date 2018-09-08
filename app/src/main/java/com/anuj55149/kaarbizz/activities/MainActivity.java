@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,13 +36,19 @@ import com.anuj55149.kaarbizz.models.Dealer;
 import com.anuj55149.kaarbizz.utilities.Constants;
 import com.anuj55149.kaarbizz.utilities.DialogBoxes;
 import com.anuj55149.kaarbizz.utilities.SharedPreference;
+import com.anuj55149.kaarbizz.utilities.Utilities;
 import com.anuj55149.kaarbizz.volley.RequestCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,6 +59,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, View.OnClickListener, RequestCallback, OnRecyclerViewItemClickListener {
 
+
     private Context context;
     private boolean isLocationPermissionGranted = false;
 
@@ -58,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private static final int ERROR_DIALOG_REQUEST = 9001;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 123;
     private static final int SEARCH_ACTIVITY_REQUEST_CODE = 11;
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
 
     private static final float defaultZoom = 13;
 
@@ -65,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
 
     private DrawerLayout drawerLayout;
     private CardView searchCard;
-    private TextView tvSearch, tvUserName, tvUserEmail;
-    private ImageView ivCancel, ivMenu, ivUserImage;
+    private TextView tvSearch, tvUserName, tvUserEmail, tvChangeLocation, tvYourLocation;
+    private ImageView ivCancel, ivMenu, ivUserImage, ivGps;
     private NavigationView navigationView;
     private RecyclerView rvMain;
 
@@ -137,15 +147,20 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         rlUserHeader = navHeaderLayout.findViewById(R.id.rlUserHeader);
         rlLoginHeader = navHeaderLayout.findViewById(R.id.rlLoginHeader);
         tvUserName = navHeaderLayout.findViewById(R.id.tvUserName);
+        tvChangeLocation = findViewById(R.id.tvChangeLocation);
         tvUserEmail = navHeaderLayout.findViewById(R.id.tvUserEmail);
         ivUserImage = navHeaderLayout.findViewById(R.id.ivUserImage);
         rvMain = findViewById(R.id.rvMain);
+        tvYourLocation = findViewById(R.id.tvYourLocation);
+        ivGps = findViewById(R.id.ivGps);
 
 
         ivMenu.setOnClickListener(this);
         tvSearch.setOnClickListener(this);
         ivCancel.setOnClickListener(this);
         rlLoginHeader.setOnClickListener(this);
+        tvChangeLocation.setOnClickListener(this);
+        ivGps.setOnClickListener(this);
 
         nearestDealers = new ArrayList<>();
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(context, this);
@@ -169,6 +184,12 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
                         Location location = (Location) locationTask.getResult();
+                        Address address = Utilities.getAddressFromLatLng(context, location.getLatitude(), location.getLongitude());
+                        pref.setCurrentLocationName("");
+                        if (address != null) pref.setCurrentAddress(address);
+                        else
+                            Toast.makeText(context, "Address could not be found", Toast.LENGTH_SHORT).show();
+                        updateYourLocation();
 
                         if (getNearestDealers) {
                             dealerDao.getNearestDealers(location.getLatitude(), location.getLongitude());
@@ -181,6 +202,15 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         } else {
             getPermissions();
         }
+    }
+
+    private void updateYourLocation() {
+        Address address = pref.getCurrentAddress();
+        String text = pref.getLocationName();
+        if (text == null || text.isEmpty()) text = address.getSubLocality();
+        if (text == null || text.isEmpty()) text = address.getLocality();
+        if (text == null || text.isEmpty()) text = address.getAdminArea();
+        tvYourLocation.setText(text);
     }
 
     private void getPermissions() {
@@ -257,22 +287,52 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
                 Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
                 break;
+            case R.id.tvChangeLocation:
+                tvChangeLocation.setClickable(false);
+                try {
+                    intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                            .build(this);
+                    startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // Indicates that Google Play Services is either not installed or not up to date. Prompt
+                    // the user to correct the issue.
+                    GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                            0 /* requestCode */).show();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // Indicates that Google Play Services is not available and the problem is not easily
+                    // resolvable.
+                    String message = "Google Play Services is not available: " +
+                            GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+                    Log.e(TAG, message);
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.ivGps:
+                ivGps.setVisibility(View.GONE);
+                getDeviceLocation(false, false);
+                break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case SEARCH_ACTIVITY_REQUEST_CODE:
-                if (resultCode == RESULT_OK && data != null) {
-                    String searchText = data.getStringExtra(Constants.SEARCH_RESULT_BACK_INTENT);
-                    if (searchText != null) {
-                        tvSearch.setText(searchText);
-                        if (!searchText.isEmpty()) ivCancel.setVisibility(View.VISIBLE);
-                        else ivCancel.setVisibility(View.GONE);
-                    }
+            case REQUEST_CODE_AUTOCOMPLETE:
+                tvChangeLocation.setClickable(true);
+                if (resultCode == RESULT_OK) {
+                    // Get the user's selected place from the Intent.
+                    ivGps.setVisibility(View.VISIBLE);
+                    Place place = PlaceAutocomplete.getPlace(this, data);
+                    pref.setCurrentLocationName(place.getName().toString());
+                    Address address = Utilities.getAddressFromLatLng(context, place.getLatLng().latitude, place.getLatLng().longitude);
+                    if (address != null) pref.setCurrentAddress(address);
+                    else
+                        Toast.makeText(context, "Address could not be found", Toast.LENGTH_SHORT).show();
+                    updateYourLocation();
+                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                    Status status = PlaceAutocomplete.getStatus(this, data);
+                    Log.e(TAG, "Error: Status = " + status.toString());
                 }
-                break;
         }
     }
 
@@ -297,7 +357,6 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
             case Constants.DAO_SERVER_STATE:
                 DialogBoxes.dismissProgressDialog();
                 if (status) {
-                    Toast.makeText(context, "Connection is successful", Toast.LENGTH_SHORT).show();
                     getDeviceLocation(true, true);
                 } else {
                     Toast.makeText(context, "Server is not connected", Toast.LENGTH_SHORT).show();

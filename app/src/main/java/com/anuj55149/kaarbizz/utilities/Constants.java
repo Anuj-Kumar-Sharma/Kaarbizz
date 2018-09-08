@@ -14,11 +14,26 @@ public class Constants {
     public static final int METHOD_GET = 2;
     public static final int METHOD_POST = 3;
 
-    public static final int GET_CARS_NAME_WITH_QUERY = 4;
+    public static final int GET_SEARCH_RESULT_WITH_QUERY = 4;
     public static final int SEARCH_RESULT_CLICKED = 5;
     public static final String SHARED_PREF_SERVER_IP_ADDRESS = "shared_pref_server_ip_address";
+    public static final String SHARED_PREF_CURRENT_ADDRESS = "shared_pref_current_locality";
+    public static final String SHARED_PREF_HISTORY_LIST = "shared_pref_history_list";
 
     public static final int DAO_SERVER_STATE = 6;
     public static final int DAO_GET_NEAREST_DEALERS = 7;
     public static final int SINGLE_DEALER_CLICKED = 8;
+    public static final String SHARED_PREF_CURRENT_LOCATION_NAME = "shared_pref_location_name";
+
+    public static final String SEARCH_TYPE_CAR_MAKE_NAME = "com.anuj55149.kaarbizz.models.searchTypes.SearchTypeCarMake";
+    public static final String SEARCH_TYPE_DEALER_NAME = "com.anuj55149.kaarbizz.models.searchTypes.SearchTypeDealer";
+    public static final String SEARCH_TYPE_MAKE_MODEL_NAME = "com.anuj55149.kaarbizz.models.searchTypes.SearchTypeMakeModel";
+    public static final int EACH_CAR_MAKE_CLICKED = 9;
+    public static final int EACH_MAKE_MODEL_CLICKED = 10;
+    public static final int EACH_DEALER_CLICKED = 11;
+
+    public static final int TYPE_DATA = -1;
+    public static final int TYPE_HISTORY = -2;
+    public static final String SHARED_PREF_HISTORY_CAR_MAKE = "shared_pref_history_car_make";
+    public static final String SHARED_PREF_HISTORY_TYPE_LIST = "shared_pref_history_type_list";
 }

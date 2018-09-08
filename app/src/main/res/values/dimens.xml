@@ -3,9 +3,12 @@
     <dimen name="top_search_corner_radius">@dimen/_2sdp</dimen>
     <dimen name="rating_padding">@dimen/_4sdp</dimen>
     <dimen name="top_search_search_margin">@dimen/_6sdp</dimen>
+    <dimen name="your_location_text_size">@dimen/_9ssp</dimen>
     <dimen name="user_email_text_size">@dimen/_10ssp</dimen>
     <dimen name="top_search_margin">@dimen/_12sdp</dimen>
     <dimen name="top_search_padding">@dimen/_12sdp</dimen>
+    <dimen name="search_attribute_text_size">@dimen/_11ssp</dimen>
+    <dimen name="search_main_name">@dimen/_13ssp</dimen>
     <dimen name="top_search_text_size">@dimen/_14ssp</dimen>
     <dimen name="menu_item_text_size">@dimen/_16ssp</dimen>
     <dimen name="each_search_margin">@dimen/_16sdp</dimen>
@@ -13,6 +16,8 @@
     <dimen name="google_button_margin">@dimen/_32sdp</dimen>
     <dimen name="toolbar_height">@dimen/_42sdp</dimen>
     <dimen name="toolbar_bar_height">@dimen/_46sdp</dimen>
+    <dimen name="playlist_image_dimen">@dimen/_54sdp</dimen>
+    <dimen name="toolbar_bar_height2">@dimen/_80sdp</dimen>
     <dimen name="user_image_dimen">@dimen/_62sdp</dimen>
     <dimen name="navigation_header_height">@dimen/_170sdp</dimen>
     <dimen name="navigation_drawer_width">@dimen/_255sdp</dimen>
