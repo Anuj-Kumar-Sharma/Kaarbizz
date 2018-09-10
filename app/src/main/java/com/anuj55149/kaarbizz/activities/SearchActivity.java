@@ -208,15 +208,27 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view, int position, int check) {
         hideKeyboard(view);
         Intent intent = new Intent(SearchActivity.this, SearchResultsActivity.class);
-        startActivity(intent);
         switch (check) {
             case Constants.EACH_CAR_MAKE_CLICKED:
                 SearchTypeCarMake searchTypeCarMake = (SearchTypeCarMake) searchList.get(position);
                 pref.updateHistoryList(searchTypeCarMake);
+
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_ACTIVITY_SEARCH_TYPE, searchTypeCarMake);
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_BRAND_URL, searchTypeCarMake.getBrandUrl());
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_ACTIVITY_SHOW_TYPE, Constants.SHOW_CAR_MAKE_NAME);
+                startActivity(intent);
+
                 break;
             case Constants.EACH_MAKE_MODEL_CLICKED:
                 SearchTypeMakeModel searchTypeMakeModel = (SearchTypeMakeModel) searchList.get(position);
                 pref.updateHistoryList(searchTypeMakeModel);
+
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_ACTIVITY_SHOW_TYPE, Constants.SHOW_MAKE_MODEL);
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_BRAND_URL, searchTypeMakeModel.getBrandUrl());
+                intent.putExtra(Constants.INTENT_SEARCH_RESULT_ACTIVITY_SEARCH_TYPE, searchTypeMakeModel);
+
+                startActivity(intent);
+
                 break;
             case Constants.EACH_DEALER_CLICKED:
                 SearchTypeDealer searchTypeDealer = (SearchTypeDealer) searchList.get(position);

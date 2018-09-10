@@ -2,8 +2,10 @@ package com.anuj55149.kaarbizz.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     private ServerStateDao serverStateDao;
     private ArrayList<Dealer> nearestDealers;
     private MainRecyclerViewAdapter mainRecyclerViewAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         }
 
         getPermissions();
+
+        showProgressDialog(context, "Connecting...");
         serverStateDao.getServerState();
     }
 
@@ -356,6 +361,7 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
         switch (check) {
             case Constants.DAO_SERVER_STATE:
                 DialogBoxes.dismissProgressDialog();
+                dismissProgressDialog();
                 if (status) {
                     getDeviceLocation(true, true);
                 } else {
@@ -371,4 +377,25 @@ public class MainActivity extends AppCompatActivity implements GoogleMap.OnCamer
     public void onClick(View view, int position, int check) {
 
     }
+
+    public void showProgressDialog(Context context, String message) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+        progressDialog.setMessage(message);
+        if (!((Activity) context).isFinishing()) {
+            progressDialog.show();
+        }
+    }
+
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+
 }

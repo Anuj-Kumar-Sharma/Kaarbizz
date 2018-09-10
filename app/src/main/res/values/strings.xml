@@ -26,5 +26,25 @@
     <string name="change"><u>CHANGE</u></string>
     <string name="dealer">DEALER</string>
     <string name="brand">BRAND</string>
+    <string name="sort_by">SORT BY</string>
+    <string name="nearest_to_me">Nearest to me</string>
+    <string name="dealer_s_rating">Dealer\'s Rating</string>
+    <string name="price_low_to_high">Price -- Low to High</string>
+    <string name="price_high_to_low">Price -- High to Low</string>
+    <string name="four_star_and_above"><![CDATA[4★ & above]]></string>
+    <string name="three_star_and_above"><![CDATA[3★ & above]]></string>
+    <string name="two_star_and_above"><![CDATA[2★ & above]]></string>
+    <string name="one_star_and_above"><![CDATA[1★ & above]]></string>
+    <string name="apply">APPLY</string>
+    <string name="reset">RESET</string>
+    <string name="yellow">Yellow</string>
+    <string name="silver">Silver</string>
+    <string name="metallic_white">Metallic White</string>
+    <string name="grey">Grey</string>
+    <string name="black">Black</string>
+    <string name="color">Color</string>
+    <string name="automatic">Automatic</string>
+    <string name="manual">Manual</string>
+    <string name="transmission_type">Transmission Type</string>
 
 </resources>

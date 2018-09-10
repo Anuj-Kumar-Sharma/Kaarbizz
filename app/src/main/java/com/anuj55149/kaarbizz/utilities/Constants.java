@@ -22,6 +22,8 @@ public class Constants {
 
     public static final int DAO_SERVER_STATE = 6;
     public static final int DAO_GET_NEAREST_DEALERS = 7;
+    public static final int DAO_GET_CARS = 15;
+    public static final int DAO_GET_DEALERS_FROM_DTYPE = 14;
     public static final int SINGLE_DEALER_CLICKED = 8;
     public static final String SHARED_PREF_CURRENT_LOCATION_NAME = "shared_pref_location_name";
 
@@ -36,4 +38,15 @@ public class Constants {
     public static final int TYPE_HISTORY = -2;
     public static final String SHARED_PREF_HISTORY_CAR_MAKE = "shared_pref_history_car_make";
     public static final String SHARED_PREF_HISTORY_TYPE_LIST = "shared_pref_history_type_list";
+
+    public static final String INTENT_SEARCH_RESULT_ACTIVITY_SEARCH_TYPE = "intent_search_result_activity_search_type";
+    public static final String INTENT_SEARCH_RESULT_ACTIVITY_SHOW_TYPE = "intent_search_result_activity_show_type";
+
+    public static final int SHOW_CAR_MAKE_NAME = 12;
+    public static final int SHOW_MAKE_MODEL = 13;
+    public static final String D_TYPE_CAR_MAKE_NAME = "carMake";
+    public static final String D_TYPE_MAKE_MODEL = "makeModel";
+    public static final String D_TYPE_DEALER = "dealer";
+    public static final int EACH_CAR_LAYOUT_CLICK = 16;
+    public static final String INTENT_SEARCH_RESULT_BRAND_URL = "intent_search_result_brand_url";
 }

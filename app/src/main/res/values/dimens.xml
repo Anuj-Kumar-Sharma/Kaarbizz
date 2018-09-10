@@ -3,6 +3,7 @@
     <dimen name="top_search_corner_radius">@dimen/_2sdp</dimen>
     <dimen name="rating_padding">@dimen/_4sdp</dimen>
     <dimen name="top_search_search_margin">@dimen/_6sdp</dimen>
+    <dimen name="rating_padding_double">@dimen/_8sdp</dimen>
     <dimen name="your_location_text_size">@dimen/_9ssp</dimen>
     <dimen name="user_email_text_size">@dimen/_10ssp</dimen>
     <dimen name="top_search_margin">@dimen/_12sdp</dimen>
@@ -21,6 +22,7 @@
     <dimen name="user_image_dimen">@dimen/_62sdp</dimen>
     <dimen name="navigation_header_height">@dimen/_170sdp</dimen>
     <dimen name="navigation_drawer_width">@dimen/_255sdp</dimen>
+    <dimen name="top_search_padding_double">@dimen/_24sdp</dimen>
 
 
 </resources>
