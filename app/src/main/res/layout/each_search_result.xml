@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlEachSearchResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/ivEachSearch"
+        android:layout_width="@dimen/playlist_image_dimen"
+        android:layout_height="@dimen/playlist_image_dimen"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/top_search_padding_double"
+        android:padding="@dimen/_6sdp" />
+
+    <RelativeLayout
+        android:id="@+id/rlEachSearchCred"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/top_search_margin"
+        android:layout_toEndOf="@id/ivEachSearch"
+        android:layout_toStartOf="@id/ivHistory">
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvEachSearchName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="@dimen/top_search_search_margin"
+            android:text="Chevrolet"
+            android:textColor="@color/black"
+            android:textSize="@dimen/search_main_name"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvEachSearchAttribute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvEachSearchName"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingEnd="@dimen/top_search_search_margin"
+            android:paddingStart="@dimen/top_search_search_margin"
+            android:text="BRAND"
+            android:textColor="@color/colorPrimaryMoreDark"
+            android:textSize="@dimen/search_attribute_text_size"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/top_search_padding"
+        android:scaleType="centerCrop"
+        android:tint="@color/colorPrimaryMoreDark"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_history" />
+
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignLeft="@id/rlEachSearchCred"
+        android:layout_below="@id/ivEachSearch"
+        android:background="@color/colorPrimaryDark" />
+
+</RelativeLayout>

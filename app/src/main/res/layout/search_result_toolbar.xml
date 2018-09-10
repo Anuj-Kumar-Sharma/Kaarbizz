@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/searchResultToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_bar_height"
+    android:background="@color/black"
+    app:elevation="0dp"
+    app:layout_collapseMode="pin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:paddingEnd="@dimen/_6sdp"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_back" />
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvSearchName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/ivBackButton"
+            android:layout_toStartOf="@+id/ivListMapToggle"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:padding="@dimen/top_search_padding"
+            android:text="Filters"
+            android:textColor="@color/white"
+            android:textSize="@dimen/search_main_name"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+        <ImageView
+            android:id="@+id/ivListMapToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/top_search_padding"
+            android:scaleType="centerCrop"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_map" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>

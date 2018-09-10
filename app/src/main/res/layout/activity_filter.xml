@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FilterActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/search_result_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rlBottomBar"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlTransmission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvMessageTransmission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="@string/transmission_type"
+                    android:textColor="@color/black"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <RadioGroup
+                    android:id="@+id/rgTransmission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvMessageTransmission"
+                    android:padding="@dimen/top_search_padding">
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbManual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manual"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbAutomatic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/automatic"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/rgTransmission"
+                    android:background="@color/colorPrimaryMoreDark" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlTransmission">
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="@string/color"
+                    android:textColor="@color/black"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <RadioGroup
+                    android:id="@+id/rgColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvColor"
+                    android:padding="@dimen/top_search_padding">
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbBlack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/black"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbGrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/grey"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbMetallicWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/metallic_white"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbSilver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/silver"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbYellow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yellow"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/rgColor"
+                    android:background="@color/colorPrimaryMoreDark" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlColor">
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvMessageDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="Max Distance"
+                    android:textColor="@color/black"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingEnd="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="80Km"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <SeekBar
+                    android:id="@+id/sbDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvDistance"
+                    android:padding="@dimen/top_search_padding_double" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/sbDistance"
+                    android:background="@color/colorPrimaryMoreDark" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlDistance">
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvMessagePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="Max Price"
+                    android:textColor="@color/black"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingEnd="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="₹80L"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <SeekBar
+                    android:id="@+id/sbPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPrice"
+                    android:padding="@dimen/top_search_padding_double" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/sbPrice"
+                    android:background="@color/colorPrimaryMoreDark" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlPrice">
+
+                <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                    android:id="@+id/tvMessageRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/top_search_padding"
+                    android:paddingTop="@dimen/top_search_padding"
+                    android:text="@string/dealer_s_rating"
+                    android:textColor="@color/black"
+                    app:typeface="@string/Font_Montserrat_Regular" />
+
+                <RadioGroup
+                    android:id="@+id/rgRating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvMessageRating"
+                    android:padding="@dimen/top_search_padding">
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbFour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/four_star_and_above"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbThree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/three_star_and_above"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/two_star_and_above"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                    <com.anuj55149.kaarbizz.customViews.TypefaceRadioButton
+                        android:id="@+id/rbOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_star_and_above"
+                        android:textColor="@color/colorPrimaryMoreDark"
+                        app:typeface="@string/Font_Montserrat_Regular" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimaryMoreDark" />
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvApply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/top_search_search_margin"
+            android:background="@color/black"
+            android:paddingBottom="@dimen/top_search_padding"
+            android:paddingEnd="@dimen/google_button_margin"
+            android:paddingStart="@dimen/google_button_margin"
+            android:paddingTop="@dimen/top_search_padding"
+            android:text="@string/apply"
+            android:textColor="@color/white"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:id="@+id/tvReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvApply"
+            android:layout_toStartOf="@+id/tvApply"
+            android:paddingBottom="@dimen/top_search_padding"
+            android:paddingEnd="@dimen/google_button_margin"
+            android:paddingStart="@dimen/google_button_margin"
+            android:paddingTop="@dimen/top_search_padding"
+            android:text="@string/reset"
+            android:textColor="@color/black"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

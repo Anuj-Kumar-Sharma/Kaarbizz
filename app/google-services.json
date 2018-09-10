@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "318320701386",
+    "firebase_url": "https://kaarbizz.firebaseio.com",
+    "project_id": "kaarbizz",
+    "storage_bucket": "kaarbizz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318320701386:android:48d226cf1b4b4fe7",
+        "android_client_info": {
+          "package_name": "com.anuj55149.kaarbizz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318320701386-lun3rvkca2av8hvgvplnof8otutt6nr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anuj55149.kaarbizz",
+            "certificate_hash": "bc2656930c86e26031deccfdeae0cb5d1850d51a"
+          }
+        },
+        {
+          "client_id": "318320701386-o43kdi98imjeubuf4me76qmfge01h1t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC884QzzRydxtongACTqGpMxYl9E-ZLs-o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318320701386-o43kdi98imjeubuf4me76qmfge01h1t9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

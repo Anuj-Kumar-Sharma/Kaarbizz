@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_header_height"
+    android:background="@color/colorAccent">
+
+    <RelativeLayout
+        android:id="@+id/rlLoginHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/google_button_margin"
+        android:background="@drawable/background_round_outline_white"
+        android:padding="@dimen/top_search_padding"
+        android:visibility="visible">
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:textColor="@color/white"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlUserHeader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_6sdp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rlUserHeaderCred"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/top_search_search_margin">
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:id="@+id/tvUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/top_search_padding"
+                android:paddingStart="@dimen/top_search_padding"
+                android:paddingTop="@dimen/top_search_padding"
+                android:text="@string/my_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/top_search_text_size"
+                app:typeface="@string/Font_Montserrat_Regular" />
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:id="@+id/tvUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvUserName"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/top_search_padding"
+                android:paddingStart="@dimen/top_search_padding"
+                android:paddingTop="@dimen/top_search_search_margin"
+                android:text="@string/my_email"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/user_email_text_size"
+                app:typeface="@string/Font_Montserrat_Light" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivUserImage"
+            android:layout_width="@dimen/user_image_dimen"
+            android:layout_height="@dimen/user_image_dimen"
+            android:layout_above="@+id/rlUserHeaderCred"
+            android:layout_marginEnd="@dimen/each_search_margin"
+            android:layout_marginStart="@dimen/top_search_padding"
+            android:padding="@dimen/_6sdp"
+            android:scaleType="centerCrop" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

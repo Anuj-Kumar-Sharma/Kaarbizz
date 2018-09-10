@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity">
+
+    <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+        android:id="@+id/tvLater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/gps_radius"
+        android:text="@string/later"
+        android:textColor="@color/black"
+        app:typeface="@string/Font_Montserrat_Light"
+        tools:ignore="RelativeOverlap" />
+
+
+    <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bnGoogleLogin"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/toolbar_height"
+        android:text="@string/welcome"
+        android:textSize="@dimen/menu_item_text_size"
+        app:typeface="@string/Font_Montserrat_Regular"
+        tools:ignore="RelativeOverlap" />
+
+    <RelativeLayout
+        android:id="@+id/bnGoogleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/google_button_margin"
+        android:layout_marginStart="@dimen/google_button_margin"
+        android:background="@drawable/background_round_corners_red"
+        android:padding="@dimen/top_search_padding"
+        android:textAllCaps="false"
+        android:textColor="@color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gps_radius"
+            app:srcCompat="@drawable/ic_google_plus" />
+
+
+        <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:paddingEnd="@dimen/gps_radius"
+            android:text="@string/continue_with_google"
+            android:textColor="@color/white"
+            app:typeface="@string/Font_Montserrat_Regular" />
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/progressView"
+        layout="@layout/progress_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

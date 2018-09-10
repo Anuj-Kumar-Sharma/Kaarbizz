@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/userToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_bar_height2"
+    android:background="@color/black"
+    android:contentInsetEnd="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetRight="0dp"
+    android:contentInsetStart="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
+    app:elevation="0dp"
+    app:layout_collapseMode="pin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlToolbarHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:paddingBottom="@dimen/top_search_padding"
+                android:paddingEnd="@dimen/top_search_padding"
+                android:paddingStart="@dimen/top_search_search_margin"
+                android:paddingTop="@dimen/top_search_padding"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_menu"
+                android:tint="@color/white" />
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/ivMenu"
+                android:layout_toEndOf="@+id/ivMenu"
+                android:layout_toStartOf="@+id/ivGps"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/top_search_padding"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/menu_item_text_size"
+                app:typeface="@string/Font_Montserrat_SemiBold" />
+
+            <ImageView
+                android:id="@+id/ivGps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:paddingBottom="@dimen/top_search_padding"
+                android:paddingEnd="@dimen/top_search_padding"
+                android:paddingStart="@dimen/top_search_search_margin"
+                android:paddingTop="@dimen/top_search_padding"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_gps"
+                android:tint="@color/white"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlYourLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/rlToolbarHeader"
+            android:paddingEnd="@dimen/top_search_search_margin"
+            android:paddingStart="@dimen/top_search_search_margin">
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:id="@+id/tvMessageYourLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/tvChangeLocation"
+                android:text="@string/your_location"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/your_location_text_size"
+                app:typeface="@string/Font_Montserrat_Light" />
+
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:id="@+id/tvYourLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvMessageYourLocation"
+                android:layout_toLeftOf="@+id/tvChangeLocation"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/top_search_padding"
+                android:paddingTop="@dimen/rating_padding"
+                android:textColor="@color/white"
+                android:textSize="@dimen/top_search_text_size"
+                app:typeface="@string/Font_Montserrat_Regular" />
+
+            <com.anuj55149.kaarbizz.customViews.TypefaceTextView
+                android:id="@+id/tvChangeLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/tvYourLocation"
+                android:layout_alignParentEnd="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="bottom"
+                android:paddingEnd="@dimen/top_search_search_margin"
+                android:paddingStart="@dimen/top_search_search_margin"
+                android:text="@string/change"
+                android:textColor="@color/white"
+                android:textSize="@dimen/your_location_text_size"
+                app:typeface="@string/Font_Montserrat_Light" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>
