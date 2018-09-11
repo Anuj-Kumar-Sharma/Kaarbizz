@@ -41,6 +41,8 @@ public class Constants {
 
     public static final String INTENT_SEARCH_RESULT_ACTIVITY_SEARCH_TYPE = "intent_search_result_activity_search_type";
     public static final String INTENT_SEARCH_RESULT_ACTIVITY_SHOW_TYPE = "intent_search_result_activity_show_type";
+    public static final String INTENT_FILTER_URL = "intent_filter_url";
+    public static final String INTENT_FILTER_ARRAY = "intent_filter_array";
 
     public static final int SHOW_CAR_MAKE_NAME = 12;
     public static final int SHOW_MAKE_MODEL = 13;

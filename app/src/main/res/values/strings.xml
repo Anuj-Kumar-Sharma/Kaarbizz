@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Kaarbizz</string>
-    <string name="api_key">AIzaSyCebTpPAk9MwhS99SsS5yf5BcRbH08dyFQ</string>
 
     <string name="Font_Montserrat_Light">Montserrat-Light</string>
     <string name="Font_Montserrat_Regular">Montserrat-Regular</string>
@@ -46,5 +45,7 @@
     <string name="automatic">Automatic</string>
     <string name="manual">Manual</string>
     <string name="transmission_type">Transmission Type</string>
+    <string name="max_distance">500Km+</string>
+    <string name="max_price">₹100L+</string>
 
 </resources>

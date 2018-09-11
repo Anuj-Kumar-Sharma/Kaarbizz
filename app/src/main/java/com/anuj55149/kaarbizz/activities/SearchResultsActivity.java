@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -59,7 +60,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     private static final float defaultZoom = 13;
     private static final int MAP_VIEW = 2;
     private static final int LIST_VIEW = 3;
-    StringBuilder carUrl;
+    private static final int FILTER_REQUEST_CODE = 1;
     Marker prevMarker = null;
     float prevRating = 0;
     private Context context;
@@ -83,6 +84,8 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     private ShowCarsResultRecyclerViewAdapter carsResultRecyclerViewAdapter;
     private CameraUpdate cameraUpdate;
     private int rbSortId = R.id.rbNearest;
+    StringBuilder carUrl, carUrlWithFilters;
+    private int filterArray[] = {-1, -1, -1, -1, -1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             url.append("&carMakeName=").append(searchTypeCarMake.getMakeName());
             showProgress();
             carUrl = url;
+            carUrlWithFilters = carUrl;
         } else if (SHOW_TYPE == Constants.SHOW_MAKE_MODEL) {
             tvTitle.setText(searchTypeMakeModel.getModelName());
             StringBuilder url = getBasicSearchUrl();
@@ -122,6 +126,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             url.append("&modelName=").append(searchTypeMakeModel.getModelName());
             showProgress();
             carUrl = url;
+            carUrlWithFilters = carUrl;
         }
 
         carDao.getCars(carUrl.toString());
@@ -251,8 +256,27 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.tvFilter:
                 Intent intent = new Intent(SearchResultsActivity.this, FilterActivity.class);
-                startActivity(intent);
+                intent.putExtra(Constants.INTENT_FILTER_ARRAY, filterArray);
+                startActivityForResult(intent, FILTER_REQUEST_CODE);
                 overridePendingTransition(0, 0);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case FILTER_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    String getUrl = data.getStringExtra(Constants.INTENT_FILTER_URL);
+                    filterArray = data.getIntArrayExtra(Constants.INTENT_FILTER_ARRAY);
+                    Log.d("searchResultTag", getUrl);
+                    String tempUrl = carUrl.toString();
+                    tempUrl += getUrl;
+                    showProgress();
+                    carUrlWithFilters = new StringBuilder(tempUrl);
+                    carDao.getCars(tempUrl);
+                }
                 break;
         }
     }
@@ -317,7 +341,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 rbSortId = checkedId;
                 dialog.dismiss();
-                String tempUrl = carUrl.toString();
+                String tempUrl = carUrlWithFilters.toString();
                 switch (rbSortId) {
                     case R.id.rbNearest:
                         tempUrl += "&sort=dist";
