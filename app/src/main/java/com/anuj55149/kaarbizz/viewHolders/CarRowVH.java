@@ -10,7 +10,7 @@ import com.anuj55149.kaarbizz.R;
 
 public class CarRowVH extends RecyclerView.ViewHolder {
 
-    public ImageView ivCarLogo;
+    public ImageView ivCarLogo, ivMail;
     public TextView tvCarMakeName, tvMakeModelName, tvCarPrice;
     public RelativeLayout rlEachCar;
 
@@ -28,5 +28,6 @@ public class CarRowVH extends RecyclerView.ViewHolder {
         tvDealerName = itemView.findViewById(R.id.tvSingleDealerName);
         tvDealerRating = itemView.findViewById(R.id.tvSingleRatings);
         tvDistance = itemView.findViewById(R.id.tvDistance);
+        ivMail = itemView.findViewById(R.id.ivMail);
     }
 }

@@ -51,4 +51,5 @@ public class Constants {
     public static final String D_TYPE_DEALER = "dealer";
     public static final int EACH_CAR_LAYOUT_CLICK = 16;
     public static final String INTENT_SEARCH_RESULT_BRAND_URL = "intent_search_result_brand_url";
+    public static final int EACH_CAR_MAIL_CLICKED = 17;
 }

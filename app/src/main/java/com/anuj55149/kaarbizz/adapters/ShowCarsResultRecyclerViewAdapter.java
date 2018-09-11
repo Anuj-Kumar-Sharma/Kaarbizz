@@ -46,6 +46,12 @@ public class ShowCarsResultRecyclerViewAdapter extends RecyclerView.Adapter<Recy
                 onRecyclerViewItemClickListener.onClick(v, carRowVH.getAdapterPosition(), Constants.EACH_CAR_LAYOUT_CLICK);
             }
         });
+        carRowVH.ivMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRecyclerViewItemClickListener.onClick(v, carRowVH.getAdapterPosition(), Constants.EACH_CAR_MAIL_CLICKED);
+            }
+        });
         return carRowVH;
     }
 

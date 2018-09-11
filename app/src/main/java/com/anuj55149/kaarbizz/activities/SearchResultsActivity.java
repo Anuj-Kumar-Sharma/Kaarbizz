@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Address;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -182,7 +183,19 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         carsResultRecyclerViewAdapter = new ShowCarsResultRecyclerViewAdapter(context, brandUrl, new OnRecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position, int check) {
-
+                switch (check) {
+                    case Constants.EACH_CAR_MAIL_CLICKED:
+                        Dealer dealer = carsList.get(position).getDealer();
+                        Intent intent = new Intent(Intent.ACTION_SENDTO);
+                        intent.setData(Uri.parse("mailto:"));
+                        intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{dealer.getEmail()});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Interested in VIN : " + carsList.get(position).getVin());
+                        intent.putExtra(Intent.EXTRA_TEXT, "Hi " + dealer.getName() + ", I am interested in buying " + carsList.get(position).getMake() + " - " + carsList.get(position).getModel());
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
+                        break;
+                }
             }
         });
 
@@ -390,6 +403,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
         GradientDrawable bgShape = (GradientDrawable) tvDealerRating.getBackground();
         bgShape.setColor(Utilities.getColorFromRating(dealer.getRating()));
+
 
         String distance = Utilities.format((long) dealer.getDistanceFromCurrentLocation() / 1000);
         tvDistance.setText(String.format("%s km away", distance));

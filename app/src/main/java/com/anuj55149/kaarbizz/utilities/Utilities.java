@@ -21,7 +21,7 @@ public class Utilities {
     private static final NavigableMap<Long, String> suffixes = new TreeMap<>();
 
     static {
-        suffixes.put(1_000L, "k");
+        suffixes.put(1_000L, "K");
         suffixes.put(1_000_000L, "M");
         suffixes.put(1_000_000_000L, "G");
         suffixes.put(1_000_000_000_000L, "T");

@@ -135,6 +135,18 @@
                 android:text="4.2 Km away"
                 app:typeface="@string/Font_Montserrat_Regular" />
 
+            <ImageView
+                android:id="@+id/ivMail"
+                android:layout_width="@dimen/google_button_margin"
+                android:layout_height="@dimen/google_button_margin"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tvSingleDealerName"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                android:tint="@color/red"
+                app:srcCompat="@drawable/ic_send_mail" />
+
         </RelativeLayout>
 
     </RelativeLayout>
@@ -142,7 +154,7 @@
     <View
         android:id="@+id/vDivider"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="2px"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryMoreDark" />
 
